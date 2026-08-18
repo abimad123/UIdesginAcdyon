@@ -12,23 +12,67 @@ const CHAIN = [
 export default function TracebackMode({ onClose }) {
   const reduced = useReducedMotion()
   const closeBtnRef = useRef(null)
+  const dialogRef = useRef(null)
 
-  // Close on Escape
+  // Keyboard navigation & Focus Trap
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      
+      if (e.key === 'Tab') {
+        if (!dialogRef.current) return
+        
+        const focusableElements = dialogRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        )
+        if (focusableElements.length === 0) {
+          e.preventDefault()
+          return
+        }
+        
+        const firstElement = focusableElements[0]
+        const lastElement = focusableElements[focusableElements.length - 1]
+
+        if (!dialogRef.current.contains(document.activeElement)) {
+          e.preventDefault()
+          firstElement.focus()
+          return
+        }
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault()
+            lastElement.focus()
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault()
+            firstElement.focus()
+          }
+        }
+      }
     }
+    
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [onClose])
 
-  // Lock body scroll while modal is open, and set focus
+  // Lock body scroll while modal is open, and set/restore focus
   useEffect(() => {
     const originalOverflow = document.body.style.overflow
+    const previouslyFocusedElement = document.activeElement
+    
     document.body.style.overflow = 'hidden'
     closeBtnRef.current?.focus()
+    
     return () => {
       document.body.style.overflow = originalOverflow
+      if (previouslyFocusedElement) {
+        previouslyFocusedElement.focus()
+      }
     }
   }, [])
 
@@ -46,6 +90,7 @@ export default function TracebackMode({ onClose }) {
 
   return (
     <motion.div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label="Traceback Mode Console"
