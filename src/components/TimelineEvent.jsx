@@ -19,8 +19,7 @@ export default function TimelineEvent({ event, isActive, isQuiet, onHover, onLea
         flex: 1,
         opacity: isQuiet ? 0.28 : 1,
         transition: 'opacity var(--duration-base) var(--ease-out)',
-        cursor: 'default',
-        outline: 'none',
+        cursor: 'pointer',
         minWidth: 0,
       }}
     >

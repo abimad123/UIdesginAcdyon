@@ -421,7 +421,7 @@ function PrimaryButton({ href, children }) {
         fontFamily: 'var(--font-sans)',
         fontSize: 'var(--text-sm)',
         fontWeight: 500,
-        color: 'hsl(36, 14%, 97%)',
+        color: 'var(--color-bg)',
         backgroundColor: 'var(--color-accent)',
         padding: '10px 22px',
         borderRadius: 'var(--radius-button)',

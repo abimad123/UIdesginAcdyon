@@ -138,7 +138,7 @@ body {
 /* ─── Selection ─────────────────────────────────────────────── */
 
 ::selection {
-  background-color: hsl(32, 90%, 40% / 0.15);
+  background-color: hsl(32 90% 40% / 0.15);
   color: var(--color-text);
 }
 

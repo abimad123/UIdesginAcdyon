@@ -39,22 +39,24 @@ const CHAIN = [
 /* ─── Animation helpers ─────────────────────────────────────────── */
 
 function fadeUp(reduced, delay = 0) {
-  if (reduced) return { initial: false, whileInView: { opacity: 1 } }
   return {
-    initial: { opacity: 0, y: 16 },
+    initial: reduced ? false : { opacity: 0, y: 16 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: '-60px' },
-    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1], delay },
+    transition: reduced
+      ? { duration: 0 }
+      : { duration: 0.55, ease: [0.16, 1, 0.3, 1], delay },
   }
 }
 
 function revealConnector(reduced) {
-  if (reduced) return { initial: false, whileInView: { scaleY: 1 } }
   return {
-    initial: { scaleY: 0 },
+    initial: reduced ? false : { scaleY: 0 },
     whileInView: { scaleY: 1 },
     viewport: { once: true, margin: '-20px' },
-    transition: { duration: 0.4, ease: 'easeOut', delay: 0.18 },
+    transition: reduced
+      ? { duration: 0 }
+      : { duration: 0.4, ease: 'easeOut', delay: 0.18 },
   }
 }
 
