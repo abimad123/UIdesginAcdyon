@@ -102,14 +102,14 @@ export default function Hero() {
         </motion.nav>
 
         {/* ─── Hero Copy ───────────────────────────────────────────── */}
-        <div style={{ paddingTop: 'var(--space-20)', paddingBottom: 'var(--space-12)' }}>
+        <div style={{ paddingTop: 'var(--space-24)', paddingBottom: 'var(--space-12)' }}>
           <motion.h1
             {...motionProps(reduced, 0.18)}
             style={{
               fontSize: 'var(--text-display)',
               fontWeight: 500,
               lineHeight: 1.08,
-              letterSpacing: '-0.025em',
+              letterSpacing: '-0.03em',
               color: 'var(--color-text)',
               marginBottom: 'var(--space-6)',
             }}
@@ -160,6 +160,7 @@ export default function Hero() {
               border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-md)',
               overflow: 'hidden',
+              boxShadow: 'var(--shadow-base)',
             }}
           >
             <PanelHeader />
@@ -249,6 +250,7 @@ export default function Hero() {
               border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-md)',
               overflow: 'hidden',
+              boxShadow: 'var(--shadow-base)',
             }}
           >
             <PanelHeader />
@@ -385,7 +387,7 @@ function NavLink({ href, children }) {
 function OpenButton() {
   return (
     <a
-      href="#open"
+      href="#product"
       style={{
         fontFamily: 'var(--font-sans)',
         fontSize: 'var(--text-sm)',

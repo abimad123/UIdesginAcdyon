@@ -149,6 +149,7 @@ export default function ProductShowcase() {
             borderRadius: 'var(--radius-lg)',
             overflow: 'hidden',
             backgroundColor: 'var(--color-bg)',
+            boxShadow: 'var(--shadow-base)',
           }}
         >
           {/* App top bar */}
